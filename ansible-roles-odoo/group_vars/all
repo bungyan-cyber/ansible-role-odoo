@@ -1,0 +1,4 @@
+db:
+  host: 10.184.0.7
+  port: 5432
+  password: P@ssw0rd

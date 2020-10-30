@@ -1,0 +1,25 @@
+- name: download odoo 10
+  get_url:
+    url: https://nightly.odoo.com/10.0/nightly/deb/odoo_10.0.20200307_all.deb
+    dest: /tmp/odoo_10.0.20200307_all.deb
+    mode: 755
+
+- name: install dep
+  apt:
+    name: python-pip
+
+- name: update and install odoo
+  apt:
+    deb: /tmp/odoo_10.0.20200307_all.deb
+   # update_cache: yes
+
+- name: start service odoo
+  service:
+    name: odoo
+    state: started
+
+- name: copy odoo.conf
+  template:
+    src: odoo.conf.j2
+    dest: /etc/odoo/odoo.conf
+  notify: "restart odoo"
